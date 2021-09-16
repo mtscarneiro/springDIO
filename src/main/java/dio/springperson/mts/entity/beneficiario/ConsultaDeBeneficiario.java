@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class ConsultaDeBeneficiario implements IConsultadorDeBenficiario {
@@ -21,23 +20,19 @@ public class ConsultaDeBeneficiario implements IConsultadorDeBenficiario {
         this.beneficiarioRepositorio = beneficiarioRepositorio;
     }
 
-    @Override
     public List<Beneficiario> acharTodos() {
         return beneficiarioRepositorio.findAll();
     }
 
-    @Override
-    public Beneficiario acharBeneficiarioPor(String id) {
+    public Beneficiario acharBeneficiarioPor(Long id) {
         return beneficiarioRepositorio.getById(id);
     }
 
-    @Override
     public Beneficiario inserirBeneficiario(Beneficiario beneficiario) {
         return beneficiarioRepositorio.save(beneficiario);
     }
 
-    @Override
-    public void deletarBeneficiarioPor(String id) {
+    public void deletarBeneficiarioPor(Long id) {
         try {
             beneficiarioRepositorio.deleteById(id);
         } catch (DataIntegrityViolationException err) {
@@ -47,13 +42,12 @@ public class ConsultaDeBeneficiario implements IConsultadorDeBenficiario {
         }
     }
 
-    @Override
-    public Beneficiario atualizarCadastroBeneficiario(String id, Beneficiario beneficiario) {
+    public Beneficiario atualizarCadastroBeneficiario(Long id, Beneficiario beneficiario) {
         try {
             Beneficiario benef = beneficiarioRepositorio.getById(id);
             atualizacaoCadastral(benef, beneficiario);
             return beneficiarioRepositorio.save(benef);
-        }  catch (EntityNotFoundException err) {
+        } catch (EntityNotFoundException err) {
             throw new ConteudoNaoExistenteException(id);
         }
     }

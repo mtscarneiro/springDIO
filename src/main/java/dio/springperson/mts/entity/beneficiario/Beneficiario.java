@@ -17,12 +17,12 @@ public class Beneficiario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String nome;
     private String sobrenome;
     private LocalDate dataDeNascimento;
 
-    public Beneficiario(String id, String nome, String sobrenome, LocalDate dataDeNascimento) {
+    public Beneficiario(Long id, String nome, String sobrenome, LocalDate dataDeNascimento) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
